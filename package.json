@@ -1,17 +1,16 @@
 {
-  "name": "@curveball/new-package",
-  "version": "0.0.1",
-  "description": "Description goes here",
+  "name": "@curveball/session-redis",
+  "version": "0.1.0",
+  "description": "Session storage backed by Redis using HTTP cookies",
   "main": "dist/index.js",
   "scripts": {
     "prepublishOnly": "make build",
     "test": "make lint test",
-    "tsc": "tsc",
-    "start": "make start"
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/curveballjs/new-package.git"
+    "url": "git+https://github.com/curveballjs/session-redis.git"
   },
   "files": [
     "package.json",
@@ -24,28 +23,32 @@
     "framework",
     "nodejs",
     "typescript",
-    "push",
-    "http2",
-    "curveball"
+    "curveball",
+    "session",
+    "cookies",
+    "cookie",
+    "redis"
   ],
-  "author": "Evert Pot (https://evertpot.com/)",
+  "author": "Matthew Mihok <matthew@mihok.computer>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/curveballjs/new-package/issues"
+    "url": "https://github.com/curveballjs/session-redis/issues"
   },
-  "homepage": "https://github.com/curveballjs/new-package#readme",
+  "homepage": "https://github.com/curveballjs/session-redis#readme",
   "devDependencies": {
     "@types/chai": "^4.1.7",
+    "@types/cookie": "^0.3.2",
     "@types/mocha": "^5.2.6",
-    "@types/node": "^12.0.2",
-    "@types/sinon": "^7.0.11",
+    "@types/node": "^11.12.0",
+    "@types/redis": "^2.8.13",
+    "@types/sinon": "^7.0.10",
     "chai": "^4.2.0",
-    "mocha": "^6.1.4",
+    "mocha": "^6.0.2",
     "nyc": "^14.1.1",
-    "sinon": "^7.3.2",
-    "ts-node": "^8.1.0",
-    "tslint": "^5.16.0",
-    "typescript": "^3.4.5"
+    "sinon": "^7.3.0",
+    "ts-node": "^8.0.3",
+    "tslint": "^5.14.0",
+    "typescript": "^3.3.4000"
   },
   "types": "dist/",
   "nyc": {
@@ -54,6 +57,9 @@
     ]
   },
   "dependencies": {
-    "@curveball/core": "^0.8.6"
+    "@curveball/core": "^0.8.1",
+    "@curveball/session": "^0.3.2",
+    "redis": "^2.8.0",
+    "cookie": "^0.3.1"
   }
 }

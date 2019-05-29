@@ -1,2 +1,1 @@
-/* tslint:disable */
-console.log('Hello world!');
+export { default as RedisStore } from './RedisStore';
