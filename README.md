@@ -1,7 +1,7 @@
 Curveball Redis Session Middleware
 ==================================
 
-This package adds support for sessions to the [Curveball][1] framework. The
+This package adds support for sessions to the [Curveball](1) framework. The
 session store is backed by Redis, therefore having an accessable Redis server
 is a prerequisite.
 
