@@ -40,7 +40,6 @@
     "@types/cookie": "^0.3.2",
     "@types/mocha": "^5.2.6",
     "@types/node": "^11.12.0",
-    "@types/redis": "^2.8.13",
     "@types/sinon": "^7.0.10",
     "chai": "^4.2.0",
     "mocha": "^6.0.2",
@@ -59,6 +58,7 @@
   "dependencies": {
     "@curveball/core": "^0.8.1",
     "@curveball/session": "^0.3.2",
+    "@types/redis": "^2.8.13",
     "cookie": "^0.3.1",
     "redis": "^2.8.0"
   }
