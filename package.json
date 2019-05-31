@@ -59,9 +59,7 @@
   "dependencies": {
     "@curveball/core": "^0.8.1",
     "@curveball/session": "^0.3.2",
-    "async-redis": "^1.1.7",
     "cookie": "^0.3.1",
-    "predis": "^1.1.1",
     "redis": "^2.8.0"
   }
 }
