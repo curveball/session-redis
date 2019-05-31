@@ -8,6 +8,7 @@
       "arrow-parens": false,
       "interface-name": false,
       "interface-over-type-literal": false,
+      "ordered-imports": true,
       "max-classes-per-file": false,
       "max-line-length": false,
       "member-access": false,

@@ -59,7 +59,7 @@
   "dependencies": {
     "@curveball/core": "^0.8.1",
     "@curveball/session": "^0.3.2",
-    "redis": "^2.8.0",
-    "cookie": "^0.3.1"
+    "cookie": "^0.3.1",
+    "redis": "^2.8.0"
   }
 }

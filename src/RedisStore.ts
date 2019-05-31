@@ -22,20 +22,20 @@ export default class RedisStore implements SessionStore {
 
   async set(id: string, values: SessionValues, expire: number): Promise<void> {
 
-    const setSession = promisify(this.client.set).bind(this.client);
+    const setSession = promisify(this.client.setex).bind(this.client);
 
     // expire is a unix timestamp, therefore we must compare it to now to find
     // an equivilent elapsed seconds that Redis prefers.
     const ttl = expire - Math.floor(Date.now() / 1000);
 
     // TODO: It may be better to use a Redis hash here instead of JSON stringify
-    await setSession(id, JSON.stringify(values), 'EX', ttl);
-
+    await setSession(id, ttl, JSON.stringify(values));
   }
 
   async get(id: string): Promise<SessionValues | null> {
 
     const getSession = promisify(this.client.get).bind(this.client);
+
     const session: any = await getSession(id);
     const values: SessionValues = <SessionValues> JSON.parse(session);
 
