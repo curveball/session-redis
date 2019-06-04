@@ -21,13 +21,12 @@ export default class RedisStore implements SessionStore {
   opts: RedisOpts;
 
   constructor(opts?: RedisOpts) {
-    const options = Object.assign({}, {
+    this.opts = Object.assign({}, {
       clientOptions: {},
       prefix: 'session',
     }, opts);
 
-    this.client = redis.createClient(options.clientOptions || {});
-
+    this.client = redis.createClient(this.opts.clientOptions);
   }
 
   async set(id: string, values: SessionValues, expire: number): Promise<void> {
@@ -39,14 +38,14 @@ export default class RedisStore implements SessionStore {
     const ttl = expire - Math.floor(Date.now() / 1000);
 
     // TODO: It may be better to use a Redis hash here instead of JSON stringify
-    await setSession(id, ttl, JSON.stringify(values));
+    await setSession(`${this.opts.prefix}-${id}`, ttl, JSON.stringify(values));
   }
 
   async get(id: string): Promise<SessionValues | null> {
 
     const getSession = promisify(this.client.get).bind(this.client);
 
-    const session: any = await getSession(id);
+    const session: any = await getSession(`${this.opts.prefix}-${id}`);
     const values: SessionValues = <SessionValues> JSON.parse(session);
 
     return values;
@@ -57,7 +56,7 @@ export default class RedisStore implements SessionStore {
 
     const deleteSession = promisify(this.client.del).bind(this.client);
 
-    await deleteSession(id);
+    await deleteSession(`${this.opts.prefix}-${id}`);
 
   }
 
