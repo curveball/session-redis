@@ -3,6 +3,11 @@ import crypto from 'crypto';
 import redis, { ClientOpts, RedisClient } from 'redis';
 import { promisify } from 'util';
 
+type RedisOpts = {
+  clientOptions: ClientOpts,
+  prefix: string,
+};
+
 /**
  * The Redis session store keeps sessions in a Redis key-value cache store. The
  * store only uses basic Redis types.
@@ -13,10 +18,15 @@ import { promisify } from 'util';
 export default class RedisStore implements SessionStore {
 
   client: RedisClient;
+  opts: RedisOpts;
 
-  constructor(options?: ClientOpts) {
+  constructor(opts?: RedisOpts) {
+    const options = Object.assign({}, {
+      clientOptions: {},
+      prefix: 'session',
+    }, opts);
 
-    this.client = redis.createClient(options);
+    this.client = redis.createClient(options.clientOptions || {});
 
   }
 
