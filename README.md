@@ -38,7 +38,7 @@ import { RedisStore } from '@curveball/session-redis';
 app.use(session({
   store: new RedisStore({
     prefix: 'mysess',
-    clientOpts: {
+    clientOptions: {
       host: 'myhost.redis',
       port: 1234,
       ...
@@ -49,7 +49,7 @@ app.use(session({
 });
 ```
 
-clientOpts is the set of options for the Redis client. The list of available
-clientOpts can be found on the [NodeRedis/node_redis](https://github.com/NodeRedis/node_redis#options-object-properties)
+clientOptions is the set of options for the Redis client. The list of available
+clientOptions can be found on the [NodeRedis/node_redis](https://github.com/NodeRedis/node_redis#options-object-properties)
 repository.
 
