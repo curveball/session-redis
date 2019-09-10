@@ -6,7 +6,10 @@ import { promisify } from 'util';
 type RedisOpts = {
   clientOptions: ClientOpts,
   prefix: string,
-};
+} | {
+  client: RedisClient
+  prefix: string
+}
 
 /**
  * The Redis session store keeps sessions in a Redis key-value cache store. The
@@ -26,7 +29,11 @@ export default class RedisStore implements SessionStore {
       prefix: 'session',
     }, opts);
 
-    this.client = redis.createClient(this.opts.clientOptions);
+    if ('client' in this.opts) {
+      this.client = this.opts.client;
+    } else { 
+      this.client = redis.createClient(this.opts.clientOptions);
+    }
   }
 
   async set(id: string, values: SessionValues, expire: number): Promise<void> {

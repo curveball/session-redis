@@ -35,7 +35,7 @@ Here is another example with more options:
 
 ```typescript
 import session from '@curveball/session';
-import { RedisStore } from '@curveball/session-redis';
+import RedisStore from '@curveball/session-redis';
 
 app.use(session({
   store: new RedisStore({
@@ -51,7 +51,32 @@ app.use(session({
 });
 ```
 
-clientOptions is the set of options for the Redis client. The list of available
-clientOptions can be found on the [NodeRedis/node_redis](https://github.com/NodeRedis/node_redis#options-object-properties)
+`clientOptions` is the set of options for the Redis client. The list of
+available `clientOptions` can be found on the [NodeRedis/node_redis][1]
 repository.
 
+Instead of passing `clientOptions`, it's also possible to pass a fully setup
+isntance of RedisClient. This can be useful if the same connection should be
+re-used by a different part of your application:
+
+```typescript
+import session from '@curveball/session';
+import RedisStore from '@curveball/session-redis';
+import { RedisClient } from 'redis';
+
+const redis = new RedisClient({
+  host: 'myhost.redis',
+  port: 1234,
+});
+
+app.use(session({
+  store: new RedisStore({
+    prefix: 'mysess',
+    client: redis
+  })
+  cookieName: 'MY_SESSION',
+  expiry: 7200
+});
+```
+
+[1]: https://github.com/NodeRedis/node_redis#options-object-properties

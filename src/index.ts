@@ -1,1 +1,1 @@
-export { default as RedisStore } from './RedisStore';
+export { default as RedisStore, default as default } from './redis-store';
