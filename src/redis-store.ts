@@ -9,7 +9,7 @@ type RedisOpts = {
 } | {
   client: RedisClient
   prefix: string
-}
+};
 
 /**
  * The Redis session store keeps sessions in a Redis key-value cache store. The
@@ -31,7 +31,7 @@ export default class RedisStore implements SessionStore {
 
     if ('client' in this.opts) {
       this.client = this.opts.client;
-    } else { 
+    } else {
       this.client = redis.createClient(this.opts.clientOptions);
     }
   }
