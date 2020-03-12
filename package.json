@@ -43,8 +43,8 @@
     "@types/sinon": "^7.0.13",
     "chai": "^4.2.0",
     "mocha": "^6.2.0",
-    "nyc": "^14.1.1",
-    "sinon": "^7.4.2",
+    "nyc": "^15.0.0",
+    "sinon": "^8.0.0",
     "ts-node": "^8.3.0",
     "tslint": "^5.20.0",
     "typescript": "^3.6.2"
@@ -56,7 +56,7 @@
     ]
   },
   "dependencies": {
-    "@curveball/core": "^0.8.1",
+    "@curveball/core": "^0.9.0",
     "@curveball/session": "^0.3.2",
     "@types/redis": "^2.8.13",
     "cookie": "^0.4.0",
