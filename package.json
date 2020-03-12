@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/curveballjs/session-redis.git"
+    "url": "git+https://github.com/curveball/session-redis.git"
   },
   "files": [
     "package.json",
@@ -32,9 +32,9 @@
   "author": "Matthew Mihok <matthew@mihok.computer>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/curveballjs/session-redis/issues"
+    "url": "https://github.com/curveball/session-redis/issues"
   },
-  "homepage": "https://github.com/curveballjs/session-redis#readme",
+  "homepage": "https://github.com/curveball/session-redis#readme",
   "devDependencies": {
     "@types/chai": "^4.2.2",
     "@types/cookie": "^0.3.2",
@@ -61,5 +61,14 @@
     "@types/redis": "^2.8.13",
     "cookie": "^0.4.0",
     "redis": "^2.8.0"
+  },
+  "mocha": {
+    "require": "ts-node/register",
+    "recursive": true,
+    "extension": [
+      "ts",
+      "js",
+      "tsx"
+    ]
   }
 }
