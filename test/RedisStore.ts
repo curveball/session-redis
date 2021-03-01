@@ -23,7 +23,7 @@ describe('RedisStore', () => {
 
     // rs.client.set = (key: string, value: string, mode: string, duration: number, cb: any = (err: any, reply: any) => 'OK') => true;
     rs.client.setex = (key: string, seconds: number, value: string, cb: any) => { cb(null, 'OK'); return true; };
-    rs.client.get = (key: string, cb: redis.Callback<string>) => { cb(null, '{"bar": "bar"}'); return true };
+    rs.client.get = (key: string, cb: redis.Callback<string>) => { cb(null, '{"bar": "bar"}'); return true; };
 
     await rs.set('foo', {bar: 'bar'}, Math.floor(Date.now() / 1000) + 10);
 
@@ -39,7 +39,7 @@ describe('RedisStore', () => {
     const rs = new RedisStore();
 
     rs.client.setex = (key: string, seconds: number, value: string, cb: any) => { cb(null, 'OK'); return true; };
-    rs.client.get = (key: string, cb: redis.Callback<string>) => { cb(null, 'null'); return true };
+    rs.client.get = (key: string, cb: redis.Callback<string>) => { cb(null, 'null'); return true; };
 
     rs.set('foo', {bar: 'bar'}, Math.floor(Date.now() / 1000) + 1)
       .then(() => {
@@ -65,7 +65,7 @@ describe('RedisStore', () => {
     const rs = new RedisStore();
 
     rs.client.setex = (key: string, seconds: number, value: string, cb?: any) => { cb(null, 'OK'); return true; };
-    rs.client.get = (key: string, cb?: any) => { cb(null, 'null'); return true };
+    rs.client.get = (key: string, cb?: any) => { cb(null, 'null'); return true; };
     rs.client.del = (key: any, cb?: any) => { cb(null, 1); return true; };
 
     await rs.set('foo', {bar: 'bar'}, Math.floor(Date.now() / 1000) + 10);
@@ -94,8 +94,8 @@ describe('RedisStore', () => {
 
     const client = {
       setex: (key: string, seconds: number, value: string, cb: any) => { cb(null, 'OK'); return true; },
-      get: (key: string, cb: redis.Callback<string>) => { cb(null, '{"bar": "bar"}'); return true },
-    }
+      get: (key: string, cb: redis.Callback<string>) => { cb(null, '{"bar": "bar"}'); return true; },
+    };
 
     const rs = new RedisStore({
       prefix: 'prefix',
