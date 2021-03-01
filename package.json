@@ -1,6 +1,6 @@
 {
   "name": "@curveball/session-redis",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Session storage backed by Redis using HTTP cookies",
   "main": "dist/index.js",
   "scripts": {
@@ -36,18 +36,29 @@
   },
   "homepage": "https://github.com/curveball/session-redis#readme",
   "devDependencies": {
-    "@types/chai": "^4.2.2",
-    "@types/cookie": "^0.3.2",
-    "@types/mocha": "^5.2.7",
-    "@types/node": "^12.7.4",
-    "@types/sinon": "^7.0.13",
-    "chai": "^4.2.0",
-    "mocha": "^6.2.0",
-    "nyc": "^15.0.0",
-    "sinon": "^8.0.0",
-    "ts-node": "^8.3.0",
-    "tslint": "^5.20.0",
-    "typescript": "^3.6.2"
+    "@curveball/core": "^0.16.2",
+    "@curveball/session": "^0.6.2",
+    "@types/chai": "^4.2.15",
+    "@types/cookie": "^0.4.0",
+    "@types/mocha": "^8.2.1",
+    "@types/node": "^12.20.4",
+    "@types/redis": "^2.8.28",
+    "@types/sinon": "^9.0.10",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
+    "chai": "^4.3.0",
+    "eslint": "^7.21.0",
+    "mocha": "^8.3.0",
+    "nyc": "^15.1.0",
+    "redis": "^3.0.2",
+    "sinon": "^9.2.4",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.2"
+  },
+  "peerDependency": {
+    "@curveball/session": "^0.6.2",
+    "@types/redis": "^2.8.28",
+    "redis": "^2.8.0"
   },
   "types": "dist/",
   "nyc": {
@@ -56,11 +67,7 @@
     ]
   },
   "dependencies": {
-    "@curveball/core": "^0.9.0",
-    "@curveball/session": "^0.3.2",
-    "@types/redis": "^2.8.13",
-    "cookie": "^0.4.0",
-    "redis": "^2.8.0"
+    "cookie": "^0.4.1"
   },
   "mocha": {
     "require": "ts-node/register",

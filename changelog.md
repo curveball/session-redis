@@ -1,10 +1,12 @@
 Changelog
 =========
 
-0.3.1 (?)
+0.4.0 (2021-03-01)
 ------------------
 
-* Typescript target is now es2019 instead of esnext to ensure that older Node.js versions are supported.
+* Upgraded to latest curveball core and curveball standards.
+* `@curveball/session` is now a peerDependency.
+* Support for `esModuleInterop: false`.
 
 
 0.3.0 (2019-09-10)
