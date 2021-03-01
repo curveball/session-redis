@@ -1,13 +1,15 @@
-import { SessionStore, SessionValues } from '@curveball/session/dist/types';
-import crypto from 'crypto';
-import redis, { ClientOpts, RedisClient } from 'redis';
+import { SessionStore } from '@curveball/session';
+import * as crypto from 'crypto';
+import * as redis from 'redis';
 import { promisify } from 'util';
 
+type SessionValues = Record<string, any>;
+
 type RedisOpts = {
-  clientOptions: ClientOpts,
+  clientOptions: redis.ClientOpts,
   prefix: string,
 } | {
-  client: RedisClient
+  client: redis.RedisClient
   prefix: string
 };
 
@@ -20,7 +22,7 @@ type RedisOpts = {
  */
 export default class RedisStore implements SessionStore {
 
-  client: RedisClient;
+  client: redis.RedisClient;
   opts: RedisOpts;
 
   constructor(opts?: RedisOpts) {
@@ -62,7 +64,7 @@ export default class RedisStore implements SessionStore {
   async delete(id: string): Promise<void> {
 
     const deleteSession = promisify(this.client.del).bind(this.client);
-
+    /* @ts-expect-error */
     await deleteSession(`${this.opts.prefix}-${id}`);
 
   }

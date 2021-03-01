@@ -1,6 +1,6 @@
 import RedisStore from '../src/redis-store';
 import * as sinon from 'sinon';
-import redis from 'redis';
+import * as redis from 'redis';
 import { expect } from 'chai';
 
 describe('RedisStore', () => {
@@ -23,6 +23,7 @@ describe('RedisStore', () => {
 
     // rs.client.set = (key: string, value: string, mode: string, duration: number, cb: any = (err: any, reply: any) => 'OK') => true;
     rs.client.setex = (key: string, seconds: number, value: string, cb: any) => { cb(null, 'OK'); return true; };
+    // @ts-expect-error
     rs.client.get = (key: string, cb: redis.Callback<string>) => { cb(null, '{"bar": "bar"}'); return true; };
 
     await rs.set('foo', {bar: 'bar'}, Math.floor(Date.now() / 1000) + 10);
@@ -39,6 +40,7 @@ describe('RedisStore', () => {
     const rs = new RedisStore();
 
     rs.client.setex = (key: string, seconds: number, value: string, cb: any) => { cb(null, 'OK'); return true; };
+    // @ts-expect-error
     rs.client.get = (key: string, cb: redis.Callback<string>) => { cb(null, 'null'); return true; };
 
     rs.set('foo', {bar: 'bar'}, Math.floor(Date.now() / 1000) + 1)
