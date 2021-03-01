@@ -1,6 +1,6 @@
 {
   "name": "@curveball/session-redis",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Session storage backed by Redis using HTTP cookies",
   "main": "dist/index.js",
   "scripts": {
