@@ -64,7 +64,7 @@ export default class RedisStore implements SessionStore {
   async delete(id: string): Promise<void> {
 
     const deleteSession = promisify(this.client.del).bind(this.client);
-    /* @ts-expect-error */
+    /* @ts-expect-error typescript is incorrectly inferring the overloaded type here */
     await deleteSession(`${this.opts.prefix}-${id}`);
 
   }
