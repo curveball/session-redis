@@ -6,11 +6,11 @@ import { promisify } from 'util';
 type SessionValues = Record<string, any>;
 
 type RedisOpts = {
-  clientOptions: redis.ClientOpts,
-  prefix: string,
+  clientOptions: redis.ClientOpts;
+  prefix: string;
 } | {
-  client: redis.RedisClient
-  prefix: string
+  client: redis.RedisClient;
+  prefix: string;
 };
 
 /**
