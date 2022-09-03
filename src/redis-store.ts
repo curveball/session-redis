@@ -6,11 +6,11 @@ import { promisify } from 'util';
 type SessionValues = Record<string, any>;
 
 type RedisOpts = {
-  clientOptions: redis.ClientOpts,
-  prefix: string,
+  clientOptions: redis.ClientOpts;
+  prefix: string;
 } | {
-  client: redis.RedisClient
-  prefix: string
+  client: redis.RedisClient;
+  prefix: string;
 };
 
 /**
@@ -55,7 +55,7 @@ export default class RedisStore implements SessionStore {
     const getSession = promisify(this.client.get).bind(this.client);
 
     const session: any = await getSession(`${this.opts.prefix}-${id}`);
-    const values: SessionValues = <SessionValues> JSON.parse(session);
+    const values: SessionValues = JSON.parse(session) as SessionValues;
 
     return values;
 

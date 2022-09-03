@@ -7,7 +7,7 @@ describe('RedisStore', () => {
 
   it('should instantiate', () => {
 
-    const rcc = sinon.stub(redis, <any>'createClient').returns({});
+    const rcc = sinon.stub(redis, 'createClient' as any).returns({});
 
     new RedisStore();
 
@@ -17,7 +17,7 @@ describe('RedisStore', () => {
 
   it('should save and retrieve a session', async () => {
 
-    const rcc = sinon.stub(redis, <any>'createClient').returns({});
+    const rcc = sinon.stub(redis, 'createClient' as any).returns({});
 
     const rs = new RedisStore();
 
@@ -35,7 +35,7 @@ describe('RedisStore', () => {
 
   it('should not give access to expired sessions', (done) => {
 
-    const rcc = sinon.stub(redis, <any>'createClient').returns({});
+    const rcc = sinon.stub(redis, 'createClient' as any).returns({});
 
     const rs = new RedisStore();
 
@@ -62,7 +62,7 @@ describe('RedisStore', () => {
 
   it ('should not give access to deleted sessions', async () => {
 
-    const rcc = sinon.stub(redis, <any>'createClient').returns({});
+    const rcc = sinon.stub(redis, 'createClient' as any).returns({});
 
     const rs = new RedisStore();
 
@@ -82,7 +82,7 @@ describe('RedisStore', () => {
 
   it ('should genreate a random session Id', async () => {
 
-    const rcc = sinon.stub(redis, <any>'createClient').returns({});
+    const rcc = sinon.stub(redis, 'createClient' as any).returns({});
     const rs = new RedisStore();
     const id = await rs.newSessionId();
 
@@ -101,7 +101,7 @@ describe('RedisStore', () => {
 
     const rs = new RedisStore({
       prefix: 'prefix',
-      client: <any>client
+      client: client as any
     });
 
     // rs.client.set = (key: string, value: string, mode: string, duration: number, cb: any = (err: any, reply: any) => 'OK') => true;
