@@ -37,7 +37,7 @@
   "homepage": "https://github.com/curveball/session-redis#readme",
   "devDependencies": {
     "@curveball/kernel": "^0.20.0",
-    "@curveball/session": "^0.6.2",
+    "@curveball/session": "^0.8.0",
     "@types/chai": "^4.2.15",
     "@types/cookie": "^0.4.0",
     "@types/mocha": "^9.1.1",
@@ -55,7 +55,7 @@
     "typescript": "^4.2.2"
   },
   "peerDependency": {
-    "@curveball/session": "^0.6.2"
+    "@curveball/session": "^0.8.0"
   },
   "types": "dist/",
   "nyc": {
