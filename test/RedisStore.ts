@@ -1,5 +1,4 @@
-import RedisStore from '../src/redis-store';
-import * as sinon from 'sinon';
+import RedisStore from '../src/redis-store.js';
 import * as redis from 'redis';
 import { expect } from 'chai';
 
@@ -7,17 +6,11 @@ describe('RedisStore', () => {
 
   it('should instantiate', () => {
 
-    const rcc = sinon.stub(redis, 'createClient' as any).returns({});
-
     new RedisStore();
-
-    rcc.restore();
 
   });
 
   it('should save and retrieve a session', async () => {
-
-    const rcc = sinon.stub(redis, 'createClient' as any).returns({});
 
     const rs = new RedisStore();
 
@@ -27,15 +20,11 @@ describe('RedisStore', () => {
     rs.client.get = (key: string, cb: redis.Callback<string>) => { cb(null, '{"bar": "bar"}'); return true; };
 
     await rs.set('foo', {bar: 'bar'}, Math.floor(Date.now() / 1000) + 10);
-
     expect(await rs.get('foo')).to.deep.equal({bar: 'bar'});
 
-    rcc.restore();
   });
 
   it('should not give access to expired sessions', (done) => {
-
-    const rcc = sinon.stub(redis, 'createClient' as any).returns({});
 
     const rs = new RedisStore();
 
@@ -52,8 +41,6 @@ describe('RedisStore', () => {
 
           done();
 
-          rcc.restore();
-
         }, 1001);
 
       });
@@ -61,8 +48,6 @@ describe('RedisStore', () => {
   });
 
   it ('should not give access to deleted sessions', async () => {
-
-    const rcc = sinon.stub(redis, 'createClient' as any).returns({});
 
     const rs = new RedisStore();
 
@@ -76,19 +61,14 @@ describe('RedisStore', () => {
 
     expect(await rs.get('foo')).to.equal(null);
 
-    rcc.restore();
-
   });
 
   it ('should genreate a random session Id', async () => {
 
-    const rcc = sinon.stub(redis, 'createClient' as any).returns({});
     const rs = new RedisStore();
     const id = await rs.newSessionId();
 
     expect(id).to.be.a('string');
-
-    rcc.restore();
 
   });
 

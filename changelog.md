@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.6.0 (????-??-??)
+------------------
+
+* This package now supports ESM and CommonJS modules.
+* No longer supports Node 14. Please use Node 16 or higher.
+* Removed the cookie dependency, it wasn't used
+
+
 0.5.0 (2022-09-03)
 ------------------
 
@@ -33,21 +41,25 @@ Changelog
 
 * Fixed bugs in readme.
 
+
 0.2.1 (2019-06-05)
 ------------------
 
 * Update readme with correct documentation.
+
 
 0.2.0 (2019-06-05)
 ------------------
 
 * Add prefix support.
 
+
 0.1.1 (2019-05-31)
 ------------------
 
 * Removed unused dependencies
 * Unittests
+
 
 0.1.0 (2019-05-29)
 ------------------
