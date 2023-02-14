@@ -1,11 +1,8 @@
 Curveball Redis Session Middleware
 ==================================
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/curveball/session-redis.svg)](https://greenkeeper.io/)
-
-This package adds support for sessions to the [Curveball][https://github.com/curveball/] framework. The
-
-session store is backed by Redis, therefore having an accessable Redis server
+This package adds support for sessions to the [Curveball](https://curveballjs.org/) framework.
+The session store is backed by Redis, therefore having an accessable Redis server
 is a prerequisite.
 
 Installation
