@@ -1,7 +1,7 @@
 import { SessionStore } from '@curveball/session';
-import * as crypto from 'crypto';
+import * as crypto from 'node:crypto';
 import * as redis from 'redis';
-import { promisify } from 'util';
+import { promisify } from 'node:util';
 
 type SessionValues = Record<string, any>;
 
@@ -12,6 +12,8 @@ type RedisOpts = {
   client: redis.RedisClient;
   prefix: string;
 };
+
+const randomBytes = promisify(crypto.randomBytes);
 
 /**
  * The Redis session store keeps sessions in a Redis key-value cache store. The
@@ -71,9 +73,7 @@ export default class RedisStore implements SessionStore {
 
   async newSessionId(): Promise<string> {
 
-    const randomBytes = promisify(crypto.randomBytes);
     const bytes = await randomBytes(32);
-
     return bytes.toString('base64');
 
   }

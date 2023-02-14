@@ -1,4 +1,4 @@
-import RedisStore from '../src/redis-store';
+import RedisStore from '../src/redis-store.js';
 import * as sinon from 'sinon';
 import * as redis from 'redis';
 import { expect } from 'chai';
