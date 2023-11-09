@@ -39,9 +39,7 @@ app.use(session({
   store: new RedisStore({
     prefix: 'mysess',
     clientOptions: {
-      host: 'myhost.redis',
-      port: 1234,
-      ...
+      url: 'redis://username:password@host:port/',
     },
   }),
   cookieName: 'MY_SESSION',
@@ -60,12 +58,9 @@ re-used by a different part of your application:
 ```typescript
 import session from '@curveball/session';
 import RedisStore from '@curveball/session-redis';
-import { RedisClient } from 'redis';
+import { createClient } from 'redis';
 
-const redis = new RedisClient({
-  host: 'myhost.redis',
-  port: 1234,
-});
+const redis = createClient('redis://localhost');
 
 app.use(session({
   store: new RedisStore({
@@ -77,4 +72,4 @@ app.use(session({
 });
 ```
 
-[1]: https://github.com/NodeRedis/node_redis#options-object-properties
+[1]: https://github.com/redis/node-redis/blob/master/docs/client-configuration.md

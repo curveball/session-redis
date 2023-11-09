@@ -8,7 +8,7 @@ type SessionValues = Record<string, any>;
 type RedisClient = ReturnType<typeof createClient>;
 
 type RedisOpts = {
-  clientOptions: RedisClientOptions,
+  clientOptions: RedisClientOptions;
   prefix: string;
 } | {
   client: RedisClient;
@@ -40,6 +40,7 @@ export default class RedisStore implements SessionStore {
       this.client = this.opts.client;
     } else {
       this.client = createClient(this.opts.clientOptions);
+      this.client.connect();
     }
   }
 
