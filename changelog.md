@@ -1,12 +1,13 @@
 Changelog
 =========
 
-0.6.0 (2023-02-14)
+0.6.0 (????-??-??)
 ------------------
 
 * This package now supports ESM and CommonJS modules.
 * No longer supports Node 14. Please use Node 16 or higher.
 * Removed the cookie dependency, it wasn't used
+* Updated to NPM Redis version 4.
 
 
 0.5.0 (2022-09-03)
