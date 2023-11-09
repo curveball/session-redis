@@ -1,17 +1,20 @@
 import { SessionStore } from '@curveball/session';
 import * as crypto from 'node:crypto';
-import * as redis from 'redis';
+import { RedisClientOptions, createClient } from 'redis';
 import { promisify } from 'node:util';
 
 type SessionValues = Record<string, any>;
 
+type RedisClient = ReturnType<typeof createClient>;
+
 type RedisOpts = {
-  clientOptions: redis.ClientOpts;
+  clientOptions: RedisClientOptions,
   prefix: string;
 } | {
-  client: redis.RedisClient;
+  client: RedisClient;
   prefix: string;
 };
+
 
 const randomBytes = promisify(crypto.randomBytes);
 
@@ -24,7 +27,7 @@ const randomBytes = promisify(crypto.randomBytes);
  */
 export default class RedisStore implements SessionStore {
 
-  client: redis.RedisClient;
+  client: RedisClient;
   opts: RedisOpts;
 
   constructor(opts?: RedisOpts) {
@@ -36,27 +39,23 @@ export default class RedisStore implements SessionStore {
     if ('client' in this.opts) {
       this.client = this.opts.client;
     } else {
-      this.client = redis.createClient(this.opts.clientOptions);
+      this.client = createClient(this.opts.clientOptions);
     }
   }
 
   async set(id: string, values: SessionValues, expire: number): Promise<void> {
-
-    const setSession = promisify(this.client.setex).bind(this.client);
 
     // expire is a unix timestamp, therefore we must compare it to now to find
     // an equivilent elapsed seconds that Redis prefers.
     const ttl = expire - Math.floor(Date.now() / 1000);
 
     // TODO: It may be better to use a Redis hash here instead of JSON stringify
-    await setSession(`${this.opts.prefix}-${id}`, ttl, JSON.stringify(values));
+    await this.client.setEx(`${this.opts.prefix}-${id}`, ttl, JSON.stringify(values));
   }
 
   async get(id: string): Promise<SessionValues | null> {
 
-    const getSession = promisify(this.client.get).bind(this.client);
-
-    const session: any = await getSession(`${this.opts.prefix}-${id}`);
+    const session: any = await this.client.get(`${this.opts.prefix}-${id}`);
     const values: SessionValues = JSON.parse(session) as SessionValues;
 
     return values;
@@ -65,9 +64,7 @@ export default class RedisStore implements SessionStore {
 
   async delete(id: string): Promise<void> {
 
-    const deleteSession = promisify(this.client.del).bind(this.client);
-    /* @ts-expect-error typescript is incorrectly inferring the overloaded type here */
-    await deleteSession(`${this.opts.prefix}-${id}`);
+    await this.client.del(`${this.opts.prefix}-${id}`);
 
   }
 
