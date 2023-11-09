@@ -27,12 +27,9 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Setup Redis
-      uses: shogo82148/actions-setup-redis@v1
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-
 
   cjs-test:
     name: Node.js tests (CommonJS)
@@ -51,8 +48,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Setup Redis
-      uses: shogo82148/actions-setup-redis@v1
     - run: npm ci
     - run: npm run build --if-present
     - run: make test-cjs
