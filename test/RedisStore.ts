@@ -1,5 +1,4 @@
 import RedisStore from '../src/redis-store.js';
-import * as redis from 'redis';
 import { expect } from 'chai';
 
 describe('RedisStore', () => {
@@ -13,11 +12,8 @@ describe('RedisStore', () => {
   it('should save and retrieve a session', async () => {
 
     const rs = new RedisStore();
-
-    // rs.client.set = (key: string, value: string, mode: string, duration: number, cb: any = (err: any, reply: any) => 'OK') => true;
-    rs.client.setex = (key: string, seconds: number, value: string, cb: any) => { cb(null, 'OK'); return true; };
-    // @ts-expect-error This didn't error before, but don't care enough to fix.
-    rs.client.get = (key: string, cb: redis.Callback<string>) => { cb(null, '{"bar": "bar"}'); return true; };
+    rs.client.setEx = async ():Promise<any> => {};
+    rs.client.get = async():Promise<any> => { return '{"bar": "bar"}';};
 
     await rs.set('foo', {bar: 'bar'}, Math.floor(Date.now() / 1000) + 10);
     expect(await rs.get('foo')).to.deep.equal({bar: 'bar'});
@@ -28,9 +24,8 @@ describe('RedisStore', () => {
 
     const rs = new RedisStore();
 
-    rs.client.setex = (key: string, seconds: number, value: string, cb: any) => { cb(null, 'OK'); return true; };
-    // @ts-expect-error This didn't error before, but don't care enough to fix.
-    rs.client.get = (key: string, cb: redis.Callback<string>) => { cb(null, 'null'); return true; };
+    rs.client.setEx = async ():Promise<any> => {};
+    rs.client.get = async():Promise<any> => { return 'null';};
 
     rs.set('foo', {bar: 'bar'}, Math.floor(Date.now() / 1000) + 1)
       .then(() => {
@@ -51,9 +46,9 @@ describe('RedisStore', () => {
 
     const rs = new RedisStore();
 
-    rs.client.setex = (key: string, seconds: number, value: string, cb?: any) => { cb(null, 'OK'); return true; };
-    rs.client.get = (key: string, cb?: any) => { cb(null, 'null'); return true; };
-    rs.client.del = (key: any, cb?: any) => { cb(null, 1); return true; };
+    rs.client.setEx = async():Promise<any> => {};
+    rs.client.get = async():Promise<any> => { return 'null';};
+    rs.client.del = async():Promise<any> => { return '1'; };
 
     await rs.set('foo', {bar: 'bar'}, Math.floor(Date.now() / 1000) + 10);
 
@@ -75,8 +70,8 @@ describe('RedisStore', () => {
   it('should save and retrieve a session with a custom client', async () => {
 
     const client = {
-      setex: (key: string, seconds: number, value: string, cb: any) => { cb(null, 'OK'); return true; },
-      get: (key: string, cb: redis.Callback<string>) => { cb(null, '{"bar": "bar"}'); return true; },
+      setEx: async(): Promise<any> => {},
+      get: async(): Promise<any> => '{"bar": "bar"}'
     };
 
     const rs = new RedisStore({
