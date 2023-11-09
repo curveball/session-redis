@@ -1,13 +1,13 @@
 Changelog
 =========
 
-0.6.0 (????-??-??)
+0.6.0 (2023-11-09)
 ------------------
 
-Note that this package upgraded the internal Redis package from 2 to 4.
-The Redis package had some BC breaks, which means that as a user of this
-package you may also need to make changes to how you configured or passed
-the Redis instance.
+Note that this package upgraded the internal Redis package from 2 to 4. The
+Redis package had some BC breaks, which means that as a user of this package
+you may also need to make changes to how you configured or passed the Redis
+instance.
 
 * This package now supports ESM and CommonJS modules.
 * No longer supports Node 14. Please use Node 16 or higher.
