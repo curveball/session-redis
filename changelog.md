@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.0 (????-??-??)
+1.0.0 (2024-07-09)
 ------------------
 
 * Finally! Curveball v1. Only took 6 years.
